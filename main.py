@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 
-from api import users
+from api import users, portfolios
 from db.db_setup import engine
-from db.models import user
+from db.models import user, portfolio
 
 user.Base.metadata.create_all(bind=engine)
+portfolio.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Fast API Made4U",
@@ -13,3 +14,4 @@ app = FastAPI(
 )
 
 app.include_router(users.router)
+app.include_router(portfolios.router)
