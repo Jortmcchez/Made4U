@@ -10,5 +10,3 @@ class Portfolio(Base):
     id = Column(Integer, primary_key=True, index=True)
     artist_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     #art_id = Column(Integer, ForeignKey("commission.id", nullable=False))
-
-    owner

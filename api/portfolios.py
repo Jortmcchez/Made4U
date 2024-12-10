@@ -20,14 +20,14 @@ async def read_portfolios(skip: int =0, limit: int = 100, db: Session = Depends(
 async def create_new_portfolio(portfolio: PortfolioCreate, db: Session = Depends(get_db)):
     return create_portfolios(db=db, portfolio=portfolio)
 
-@router.get("/portfolios/{artist_id}", response_model=Portfolio)
+@router.get("/portfolios/artist_id", response_model=Portfolio)
 async def read_portfolio(artist_id: int, db: Session = Depends(get_db)):
     db_portfolio = get_portfolio_by_artist_id(db=db, artist_id=artist_id)
     if db_portfolio is None:
         raise HTTPException(status_code=404, detail="Portfolio not found")
     return db_portfolio
 
-@router.get("/portfolios/{portfolio_id}", response_model=List[Portfolio])
+@router.get("/portfolios/{portfolio_id}", response_model=Portfolio)
 async def read_portfolio(portfolio_id: int, db: Session = Depends(get_db)):
     db_portfolio = get_portfolio(db=db, portfolio_id=portfolio_id)
     if db_portfolio is None:
